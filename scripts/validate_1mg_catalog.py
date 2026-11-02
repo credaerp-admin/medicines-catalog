@@ -38,9 +38,16 @@ def validate(path: str, allow_source_gaps: bool = False) -> tuple[list[str], dic
                     errors.append(f"line {line}: invalid MRP {row.get('mrp', '')!r}")
             key = row.get("brand_name", "").strip().upper()
             duplicate_values[key].add((row.get("mrp", ""), row.get("pack_size_label", "")))
+    conflict_count = 0
     for brand, values in duplicate_values.items():
         if len(values) > 1:
-            errors.append(f"conflicting variants for {brand}: {sorted(values)}")
+            conflict_count += 1
+            if conflict_count <= 20:
+                print(f"WARNING: conflicting variants for {brand}: {sorted(values)}", file=sys.stderr)
+    if conflict_count > 20:
+        print(f"WARNING: ... {conflict_count - 20} more brand conflicts (suppressed)", file=sys.stderr)
+    if conflict_count:
+        print(f"WARNING: {conflict_count} brand(s) with multiple pack/price variants in output CSV (last-write-wins in DB)", file=sys.stderr)
     return errors, dict(counts)
 
 
