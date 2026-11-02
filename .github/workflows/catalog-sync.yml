@@ -1,6 +1,8 @@
 name: 1mg Medicine Catalog SSOT Sync
 
 on:
+  schedule:
+    - cron: '0 0 1 * *'
   workflow_dispatch:
 
 concurrency:
