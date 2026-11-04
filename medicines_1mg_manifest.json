@@ -1,9 +1,0 @@
-{
-  "source": "https://www.1mg.com/sitemap.xml",
-  "source_policy": "detail-page-only; no cross-product fallback or guessed values",
-  "catalog_file": "medicines_latest.csv",
-  "exception_file": "medicines_1mg_exceptions.csv",
-  "published_rows": 386583,
-  "source_exceptions": 294501,
-  "sha256": "dac8e1ae79fe9c2ad0211a50b7b39ff25b1d14eb81c5490b97176fbdf3b24d1f"
-}
